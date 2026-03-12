@@ -120,10 +120,43 @@ body {
     animation-delay: -10s;
 }
 
+/* Organic blobs for added randomness */
+.floating-blob {
+    position: absolute;
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    filter: blur(40px);
+    opacity: 0.4;
+    animation: morph 15s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    width: 25vw;
+    height: 25vw;
+    background: var(--accent-color);
+    top: 60%;
+    left: 10%;
+    animation-duration: 22s;
+}
+
+.blob-2 {
+    width: 20vw;
+    height: 20vw;
+    background: var(--sphere-2);
+    top: 20%;
+    right: 5%;
+    animation-duration: 18s;
+    animation-delay: -5s;
+}
+
 @keyframes float {
     0% { transform: translate(0, 0) scale(1); }
     50% { transform: translate(5%, 5%) scale(1.1); }
     100% { transform: translate(-5%, -5%) scale(0.9); }
+}
+
+@keyframes morph {
+    0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg) scale(1); }
+    100% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; transform: rotate(180deg) scale(1.1); }
 }
 
 /* --- Layout --- */
@@ -241,6 +274,7 @@ main {
     margin-bottom: 1rem;
     background: linear-gradient(135deg, var(--text-main), var(--accent-color));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.02em;
 }
@@ -302,7 +336,7 @@ main {
 .mockup-body {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
 .mockup-card {
@@ -312,6 +346,24 @@ main {
     align-items: center;
     gap: 1rem;
     font-size: 0.875rem;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+}
+
+/* Add randomness to mockup cards */
+.mockup-card:nth-child(1) {
+    transform: rotate(-3deg) translateX(-6px);
+}
+.mockup-card:nth-child(2) {
+    transform: rotate(2deg) translateX(8px);
+}
+.mockup-card:nth-child(3) {
+    transform: rotate(-1.5deg) translateX(-3px);
+}
+
+.mockup-card:hover {
+    transform: rotate(0deg) translateY(-4px) scale(1.02);
+    z-index: 10;
 }
 
 .mockup-card.empty {
@@ -347,6 +399,30 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Add randomness to feature cards */
+.feature-card:nth-child(1) {
+    transform: rotate(-1deg) translateY(10px);
+}
+.feature-card:nth-child(2) {
+    transform: rotate(1.5deg) translateY(-5px);
+}
+.feature-card:nth-child(3) {
+    transform: rotate(-0.5deg) translateY(5px);
+}
+
+.feature-card:hover {
+    transform: rotate(0deg) translateY(-8px);
+    z-index: 2;
+}
+
+@media (min-width: 901px) {
+    .feature-card:nth-child(2) {
+        margin-top: 3.5rem; /* Stagger the middle card */
+    }
 }
 
 .icon-wrapper {
